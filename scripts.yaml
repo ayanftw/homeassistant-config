@@ -1,0 +1,20 @@
+bed_light:
+  alias: Bed light
+  sequence:
+  - data:
+      effect: random
+    entity_id: light.bed_rgb_light
+    service: light.turn_on
+  - delay: '{{ states(''input_number.bed_light_on_duration'') | multiply(60) |
+      timestamp_custom(''%H:%M:%S'',False) }}'
+  - entity_id: light.bed_rgb_light
+    service: light.turn_off
+morning_light:
+  alias: Morning light
+  sequence:
+  - entity_id: all
+    service: light.turn_on
+  - delay: '{{ states(''input_number.morning_light_on_duration'') | multiply(60) | timestamp_custom(''%H:%M:%S'',False)
+      }}'
+  - entity_id: all
+    service: light.turn_off

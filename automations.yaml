@@ -1,0 +1,70 @@
+- id: dusklight
+  alias: Downstairs lights on before dusk
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+  - below: '11'
+    entity_id: sun.sun
+    platform: numeric_state
+    value_template: '{{ state.attributes.elevation }}'
+  action:
+  - data:
+      entity_id:
+      - light.kitchen_star
+      - scene.cosy_living_room
+    service: homeassistant.turn_on
+- id: lamp_away
+  alias: Downstairs lights off at bedtime
+  trigger:
+  - minutes: /2
+    platform: time_pattern
+  condition:
+  - condition: state
+    entity_id: media_player.panasonic_viera_tv
+    for:
+      minutes: 5
+    state: 'off'
+  - condition: state
+    entity_id: light.downstairs_lamp
+    for:
+      minutes: 30
+    state: 'on'
+  - after: '22:15:00'
+    before: 08:00:00
+    condition: time
+  action:
+  - data:
+      entity_id: group.downstairs_lights
+    service: homeassistant.turn_off
+  initial_state: true
+- id: morninglight
+  alias: Lights on in the morning
+  trigger:
+  - at: 07:20:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: state
+    entity_id: calendar.rock_kitchen_harris_ltdliam_brown
+    state: 'off'
+  action:
+  - service: script.morning_light
+- id: music_when_home
+  alias: Play music when arriving home
+  trigger:
+  - platform: state
+    entity_id: device_tracker.pixel2
+    from: not_home
+    to: home
+  condition:
+  - condition: numeric_state
+    entity_id: device_tracker.pixel2
+    value_template: '{{ float(as_timestamp(trigger.to_state.last_changed) - as_timestamp(trigger.from_state.last_changed))}}'
+    above: 1200
+  - condition: time
+    before: '23:00:00'
+  action:
+  - service: script.spotify_on_shield

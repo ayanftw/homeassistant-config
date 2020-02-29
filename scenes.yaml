@@ -1,0 +1,15 @@
+- id: '1583000065671'
+  name: Cosy living room
+  entities:
+    light.sofa_rgb_light:
+      brightness: 255
+      effect: Random
+    light.window_star:
+      friendly_name: Window star
+      state: 'on'
+    light.downstairs_lamp:
+      friendly_name: Window star
+      state: 'off'
+    switch.2nice_1_smart_plug:
+      friendly_name: Lanterns
+      state: 'on'

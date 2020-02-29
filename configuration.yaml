@@ -1,0 +1,75 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  time_zone: Europe/London
+
+frontend:
+
+discovery:
+
+http:
+
+updater:
+
+history:
+
+logbook:
+
+sun:
+
+
+mqtt:
+  broker: !secret mqtt_broker 
+  port: !secret mqtt_port 
+  client_id: !secret mqtt_client_id 
+  keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: True
+
+zone:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  radius: 20
+  icon: mdi:home
+
+asuswrt:
+  host: !secret asusip
+  username: !secret asususer
+  password: !secret asuspass
+  
+sensor: !include_dir_list sensors/
+media_player: !include_dir_list media_players/
+switch: !include_dir_list switches/
+light: !include_dir_list lights/
+group: !include groups.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+automation: !include automations.yaml
+config:
+binary_sensor:
+  - platform: workday
+    country: UK
+
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+
+input_number:
+  morning_light_on_duration:
+    name: Morning light on duration
+    initial: 30
+    min: 0
+    max: 60
+    step: 1
+  bed_light_on_duration:
+    name: Bed light on duration
+    initial: 30
+    min: 0
+    max: 180
+    step: 1

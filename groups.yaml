@@ -1,0 +1,6 @@
+downstairs_lights:
+        entities:
+                - light.downstairs_lamp
+                - light.kitchen_star
+                - light.window_star
+                - light.sofa_rgb_light
