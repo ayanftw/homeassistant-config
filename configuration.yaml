@@ -44,8 +44,6 @@ asuswrt:
   
 sensor: !include_dir_list sensors/
 media_player: !include_dir_list media_players/
-switch: !include_dir_list switches/
-light: !include_dir_list lights/
 group: !include groups.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
