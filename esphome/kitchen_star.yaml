@@ -1,0 +1,45 @@
+esphome:
+  name: kitchen_star
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+# Enable logging
+#logger:
+
+mqtt:
+    broker: !secret mqtt_broker
+    username: !secret mqtt_username
+    password: !secret mqtt_password
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    id: sonoff_button
+    internal: True
+    on_press:
+      - light.toggle: light_relay
+
+light:
+  - platform: binary
+    output: relay
+    name: "Kitchen star"
+    id: light_relay
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes

@@ -1,0 +1,6 @@
+substitutions:
+    devicename: bed_rgb
+    upper_devicename: "Bed RGB"
+
+<<: !include device_templates/arilux_lc01.yaml
+

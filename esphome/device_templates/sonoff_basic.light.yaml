@@ -1,0 +1,23 @@
+<<: !include sonoff_basic.base.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "${upper_devicename} Button"
+    on_press:
+      - light.toggle: light_relay
+
+light:
+  - platform: binary
+    output: relay
+    name: "${upper_devicename}"
+    id: light_relay
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+

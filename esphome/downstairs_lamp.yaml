@@ -1,0 +1,6 @@
+substitutions:
+    devicename: downstairs_lamp
+    upper_devicename: "Downstairs lamp"
+
+<<: !include device_templates/sonoff_basic.light.yaml
+

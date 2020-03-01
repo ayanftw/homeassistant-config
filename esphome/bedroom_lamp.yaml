@@ -1,0 +1,6 @@
+substitutions:
+    devicename: bedroom_lamp
+    upper_devicename: "Bedroom lamp"
+
+<<: !include device_templates/sonoff_basic.light.yaml
+

@@ -1,0 +1,43 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+<<: !include ../common/common.yaml
+<<: !include ../common/sensors.yaml
+
+output:
+  - platform: esp8266_pwm
+    id: output_red
+    pin: GPIO14
+  - platform: esp8266_pwm
+    id: output_green
+    pin: GPIO5
+  - platform: esp8266_pwm
+    id: output_blue
+    pin: GPIO12
+
+status_led:
+    pin: GPIO2
+
+light:
+  - platform: rgb
+    name: "${upper_devicename} light"
+    red: output_red
+    green: output_green
+    blue: output_blue
+    effects:
+        - random
+        - random:
+            name: "Quick random"
+            transition_length: 1s
+            update_interval: 1s
+        - random:
+            name: "Slow random"
+            transition_length: 30s
+            update_interval: 30s
+        - flicker
+        - flicker:
+            name: "Flicker 2"
+            alpha: 95%
+            intensity: 15%

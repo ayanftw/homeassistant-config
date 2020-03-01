@@ -1,0 +1,5 @@
+substitutions:
+    devicename: 2nice_4
+    upper_devicename: "2nice 4"
+
+<<: !include device_templates/2nice_socket.yaml

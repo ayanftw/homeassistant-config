@@ -1,0 +1,5 @@
+substitutions:
+    devicename: window_star
+    upper_devicename: "Window star"
+
+<<: !include device_templates/sonoff_basic.light.yaml
